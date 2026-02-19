@@ -477,3 +477,13 @@ If we want we can inspect all the fields in a serializer instance.
     ```
 
 </details>
+
+
+
+
+📫 Connect
+Portfolio: rabbi.crsyndicate.info
+Email: rabbiprimon00000@gmail.com
+LinkedIn: /in/md-rabbi-islam-747770231/
+Phone: +8801644358765
+Coding Profiles: LeetCode • HackerRank
