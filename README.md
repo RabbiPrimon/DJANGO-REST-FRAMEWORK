@@ -1,5 +1,8 @@
 # Django REST-API
 
+## Day-wise Learning Notes
+- Day 1 full documentation: [day1/config/DAY1_LEARNING.md](day1/config/DAY1_LEARNING.md)
+
 <details>
 <summary>Start with REST API</summary>
 
