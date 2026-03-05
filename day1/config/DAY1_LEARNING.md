@@ -88,15 +88,22 @@ class TodoAdmin(admin.ModelAdmin):
 Admin URL:
 - `http://127.0.0.1:8000/admin/`
 
-## 6. API Endpoint Tested
-- Todo list:
+## 6. API Endpoints Tested
+- Pending todo list:
   - `GET http://127.0.0.1:8000/api/todos/`
+- Completed todo list:
+  - `GET http://127.0.0.1:8000/api/done-todos/`
 
 Sample response:
 ```json
 [
-  {"id": 1, "title": "Learn DRF serializers", "is_done": false, "created_at": "..."},
   {"id": 2, "title": "Build Todo API endpoint", "is_done": false, "created_at": "..."},
+  {"id": 1, "title": "Learn DRF serializers", "is_done": false, "created_at": "..."}
+]
+```
+Done endpoint sample:
+```json
+[
   {"id": 3, "title": "Test admin panel login", "is_done": true, "created_at": "..."}
 ]
 ```
@@ -152,6 +159,7 @@ git push --force-with-lease origin main
 - DRF `ModelSerializer`
 - Function-based API with `@api_view`
 - URL routing (`project urls` + `app urls`)
+- Queryset filtering by status (`is_done=True/False`)
 - Django admin model registration and customization
 - Superuser/staff authentication basics
 - Debugging 404 due to wrong server/project
@@ -163,4 +171,3 @@ git push --force-with-lease origin main
 - Add update/delete methods.
 - Add pagination and ordering.
 - Add `.gitignore` and remove `Env/` from repository tracking.
-

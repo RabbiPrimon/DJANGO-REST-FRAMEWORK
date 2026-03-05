@@ -19,7 +19,7 @@ This directory contains a simple Todo API built with Django and Django REST Fram
   - `title`
   - `is_done`
   - `created_at`
-- API endpoint to list todos: `GET /api/todos/`
+- Separate API endpoints for pending and completed todos
 - Django admin integration with filter/search/list columns
 
 ## 2. Directory Structure
@@ -121,7 +121,13 @@ File: `api/views.py`
 ```python
 @api_view(['GET'])
 def todo_list(request):
-    todos = Todo.objects.all()
+    todos = Todo.objects.filter(is_done=False).order_by('-created_at')
+    serializer = TodoSerializer(todos, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def done_todo_list(request):
+    todos = Todo.objects.filter(is_done=True).order_by('-created_at')
     serializer = TodoSerializer(todos, many=True)
     return Response(serializer.data)
 ```
@@ -133,6 +139,7 @@ App urls (`api/urls.py`):
 ```python
 urlpatterns = [
     path('todos/', todo_list),
+    path('done-todos/', done_todo_list),
 ]
 ```
 
@@ -145,13 +152,15 @@ urlpatterns = [
 ]
 ```
 
-### Available Endpoint
+### Available Endpoints
 
-- `GET /api/todos/`
+- `GET /api/todos/` -> only pending (`is_done=False`) todos
+- `GET /api/done-todos/` -> only completed (`is_done=True`) todos
 
 Example local URL:
 
 - `http://127.0.0.1:8000/api/todos/`
+- `http://127.0.0.1:8000/api/done-todos/`
 
 ### Example Response
 
@@ -222,6 +231,12 @@ Note: currently no automated test cases are implemented (`0 tests`).
 - Ensure server is running from `day1/config`
 - Ensure URL includes trailing slash: `/api/todos/`
 
+### Problem: response does not look filtered
+
+- `/api/todos/` should return only pending items
+- `/api/done-todos/` should return only completed items
+- Verify test data has mixed `is_done=True/False`
+
 ### Problem: Admin login fails
 
 - Confirm superuser exists:
@@ -246,7 +261,7 @@ python manage.py runserver 8001
 
 ## 12. Current Limitations
 
-- Only `GET` list endpoint is implemented
+- Only `GET` list endpoints are implemented
 - No create/update/delete API yet
 - No pagination/filtering for API
 - No test coverage yet

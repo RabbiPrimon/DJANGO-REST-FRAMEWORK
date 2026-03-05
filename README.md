@@ -32,4 +32,5 @@ python manage.py runserver
 Open:
 
 - API: `http://127.0.0.1:8000/api/todos/`
+- Done API: `http://127.0.0.1:8000/api/done-todos/`
 - Admin: `http://127.0.0.1:8000/admin/`
